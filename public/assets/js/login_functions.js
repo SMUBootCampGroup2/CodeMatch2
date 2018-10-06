@@ -1,3 +1,19 @@
+function escapeHTML(string) {
+	var HTMLentities = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#39;',
+		'/': '&#x2F;',
+		'`': '&#x60;',
+		'=': '&#x3D;'
+	};
+  return String(string).replace(/[&<>"'`=\/]/g, function (entity) {
+    return HTMLentities[entity];
+  });
+  
+}
 
 function displayErrors(input, errorMsg) {
 	$('#errors-display').empty();
@@ -7,9 +23,11 @@ function displayErrors(input, errorMsg) {
 	var error = $('<p>');
 	error.html('&middot; ' + errorMsg);
 	error.addClass('errors');
+	
 	errorsDiv.append(error);
 	$('#errors-display').append(errorsDiv);
 	$('#errors-display').removeClass('js-hidden');
+	
 	$('#' + input + '-icon').removeClass('js-hidden');
 	var inputs = document.getElementsByTagName('input');
 	for(var i = 0; i < inputs.length; i++) {
@@ -18,19 +36,21 @@ function displayErrors(input, errorMsg) {
 	if(input == 'password') {
 		$('#password-icon').text('!').addClass('error-icon');
 	}
-};
+}
 
 function signUp() {
+	
 	var email = $('#email').val().trim();
 	var password = $('#password').val().trim();
 	var passwordConfirm = $('#password-confirm').val().trim();
-	username = $('#username').val().trim();
+	var username = $('#username').val().trim();
 	var errors = false;
+	
 	$('#username-icon').addClass('js-hidden');
 	$('#email-icon').addClass('js-hidden');
 	$('#password-icon').text('?').removeClass('error-icon');
 	$('#confirm-icon').addClass('js-hidden');
-	
+
 	if(username == '') {
 		displayErrors ('username', 'Username required');
 		errors = true;
@@ -43,7 +63,9 @@ function signUp() {
 		displayErrors ('username', 'Username must be between 4 and 25 characters long');
 		errors = true;
 		$('#username').focus().addClass('error');
-	} else if(email == '') {
+	} else
+
+	if(email == '') {
 		displayErrors ('email', 'Email is required');
 		errors = true;
 		$('#email').focus().addClass('error');
@@ -51,7 +73,9 @@ function signUp() {
 		displayErrors ('email', 'Email address is not valid');
 		errors = true;
 		$('#email').focus().addClass('error');
-	} else if(password == '') {
+	} else
+	
+	if(password == '') {
 		displayErrors ('password', 'Password is required');
 		errors = true;
 		$('#password').focus().addClass('error');
@@ -79,7 +103,9 @@ function signUp() {
 		displayErrors('password', 'Password must be between 6 and 15 characters');
 		errors = true;
 		$('#password').focus().addClass('error');
-	} else if(passwordConfirm == '') {
+	} else 
+	
+	if(passwordConfirm == '') {
 		displayErrors ('confirm', 'Please confirm password');
 		errors = true;
 		$('#password-confirm').focus().addClass('error');
@@ -103,24 +129,27 @@ function signUp() {
 			console.log(error);
 		});
 	}
-}; //closes signUp function
+}
 
 function sendEmailVerification() {
 	firebase.auth().currentUser.sendEmailVerification().then(function() {
 		console.log('Email verification sent');
 	});
-}; //closes sendEmailVerification function
+}
 
 function signIn() {
 	var errors = false;
+	
 	$('#email-icon').addClass('js-hidden');
 	$('#password-icon').addClass('js-hidden');
+	
 	if(firebase.auth().currentUser) {
 		//	If user is signed in, sign them out
 		firebase.auth().signOut();
 	} else {
 		var email = $('#email').val().trim();
 		var password = $('#password').val().trim();
+		
 		if(email == '') {
 			displayErrors ('email', 'Email required');
 			$('#email').focus().addClass('error');
@@ -130,11 +159,13 @@ function signIn() {
 			$('#password').focus().addClass('error');
 			errors = true;
 		}
+	
 		if(!errors) {
 			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 				//	Handle errors here
 				var errorCode = error.code;
 				var errorMessage = error.message;
+					
 				if(errorCode === 'auth/wrong-password') {
 					displayErrors('password', 'Incorrect password');
 					$('#password').focus().addClass('error');
@@ -143,35 +174,38 @@ function signIn() {
 					$('#email').focus().addClass('error');
 				}
 				console.log(error);
-			})
-			window.location.href = "../index.html";
-		}	
+			});
+		}
+			
 	}
-}; //closes signIn function
+}
 
 function logOut() {
-	console.log("logOut button has been clicked");
+	
 	if(firebase.auth().currentUser) {
 		//	If user is signed in, sign them out
-		firebase.auth().signOut();
+        firebase.auth().signOut();
+        
 	}
-}; //closes logOut function
-
-$(document).on("click", ".logout", logOut);
+}
 
 function resetPassword() {
 	var errors = false;
+	
 	var email = $('#email').val().trim();
+	
 	$('#email-icon').addClass('js-hidden');
+	
 	if(email == '') {
 		displayErrors('email', 'Email required');
 		$('#email').focus().addClass('error');
 		errors = true;
 	}
+	
 	if(!errors) {
 		firebase.auth().sendPasswordResetEmail(email).then(function() {
 			alert('Password has been reset. Follow the instructions in the email sent to your inbox to change your password and login.');
-			window.location.href= "login.html";
+			window.location.href='login.html';
 		}).catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;
@@ -185,4 +219,4 @@ function resetPassword() {
 			console.log(error);
 		});
 	}
-}; // closes resetPassword function
+}
