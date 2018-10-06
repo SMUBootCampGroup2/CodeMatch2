@@ -29,5 +29,7 @@ $(document).ready(function () {
         } else {
             console.log("else do nothing");
         }
+        // console.log(document.cookie);
+        // console.log(document.cookie[9])
     });
 });		//	End of document.ready()
