@@ -9,18 +9,18 @@ Code.Match is a web app that connects tutors and students based off of their Web
 We built Code.Match with the following technologies:
 •	Node.js
 •	Express
-* HTML
-* CSS
++  HTML
++  CSS
 •	MySQL
 •	Bootstrap
 •	Materialize
-* Sequelize
++  Sequelize
 •	Github
 •	Git
 
 ## Future Enhancements
 •	geolocation
-* calendar integration showing available tutors
++ calendar integration showing available tutors
 •	customizable profiles
 •	tutor reviews
 •	chat
