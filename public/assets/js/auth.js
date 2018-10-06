@@ -1,37 +1,4 @@
 
-
-$(document).ready(function () {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            //	redirect to homepage if logged in
-            // window.location.href = "../index.html";
-        } else {
-            //	User is signed out
-            console.log('User is signed out');
-        }
-    });
-    $('#login-btn').click(function (event) {
-        event.preventDefault();
-        signIn();
-    });
-});
-
-function escapeHTML(string) {
-	var HTMLentities = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		"'": '&#39;',
-		'/': '&#x2F;',
-		'`': '&#x60;',
-		'=': '&#x3D;'
-	};
-  return String(string).replace(/[&<>"'`=\/]/g, function (entity) {
-    return HTMLentities[entity];
-  });
-};
-
 function displayErrors(input, errorMsg) {
 	$('#errors-display').empty();
 	var errorsDiv = $('<h3>');
@@ -183,12 +150,14 @@ function signIn() {
 }; //closes signIn function
 
 function logOut() {
-	
+	console.log("logOut button has been clicked");
 	if(firebase.auth().currentUser) {
 		//	If user is signed in, sign them out
 		firebase.auth().signOut();
 	}
 }; //closes logOut function
+
+$(document).on("click", ".logout", logOut);
 
 function resetPassword() {
 	var errors = false;
