@@ -181,3 +181,27 @@ nav ul li.active {
 .borderOrange {
     border: 1px solid orangered;
 }
+
+/************ABOUT US****************/
+
+.about-text {
+word-wrap: break-word;
+font-size: 18px;
+text-align: justify;
+
+}
+
+#about-container {
+    width: 100%;
+    height: 100%;
+}
+
+#shay, #james, #peter, #teresa {
+
+}
+
+#main-container {
+
+    width: 100%;
+    height: 100%;
+}
