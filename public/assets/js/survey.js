@@ -9,6 +9,6 @@ $(document).ready(function () {
     console.log(userName);
     $(".welcomeUser").text("Welcome " + userName + ". Please fill out the following survey to help us match you with the perfect tutor."  );
 
-    // $("#userName").text(userName);
+    $("#userName").val(userName);
 
 });
