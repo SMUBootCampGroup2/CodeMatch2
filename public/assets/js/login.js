@@ -19,9 +19,6 @@ function signIn() {
 				alert(errorMessage);
 			}
 			console.log(error);
-			
-			isLoggedIn = true;
-			console.log(isLoggedIn);
 		});
 	}
 } //closes signIn function
@@ -36,6 +33,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 	console.log("user: " + user);
 	console.log("user.email: " + user.email);
 	console.log("user.uid: " + user.uid);
+	console.log("user.username: " + user.username);
 	// console.log(JSON.stringify(user));
 	if (user) {
 		//routes to homepage if logged in

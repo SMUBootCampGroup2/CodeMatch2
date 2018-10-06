@@ -15,16 +15,16 @@
 	<script src="https://unpkg.com/ionicons@4.2.4/dist/ionicons.js"></script>
 	<!--	jQuery	-->
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-		crossorigin="anonymous"></script>
+	 crossorigin="anonymous"></script>
 	<!--	Firebase	-->
 	<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
 	<script src="/assets/js/firebase.js"></script>
-	<!-- login/signup/logout functions -->
-	<script src="./assets/js/auth.js"></script>
-	<script src="./assets/js/signup.js" ></script>
+
+	<script src="./assets/js/login_functions.js" ></script>
+
 	<!--JavaScript-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/assets/js/match.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<!-- <script src="/assets/js/match.js"></script> -->
 
 	<title>Survey</title>
 </head>
@@ -37,9 +37,10 @@
 			<ul class="left hide-on-med-and-down">
 				<li><a class="menu" href="/">Home</a></li>
 				<li><a class="menu" href="/about-us">About Us</a></li>
-				<li><a class="menu" href="#">Become A Tutor</a></li>
+				<li><a class="menu" href="/tutor">Become A Tutor</a></li>
 				<li><a class="menu" href="/login">Login</a></li>
 				<li class="active"><a class="menu" href="/signup">Sign Up</a></li>
+				<li><button class="logout">Log Out</button></li>
 			</ul>
 		</div>
 	</nav>
@@ -100,39 +101,41 @@
 	<!----End Container Card-->
 
 	<script>
-		// var username = "";
+		var username = "";
+		$(document).ready(function () {
+			//	Listens for users signing in or out
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user && username != "") {
+					//	User successfully created
+					user.updateProfile({
+						displayName: username
+					}).then(function () {
+						db.ref("users/" + user.uid + "/userInfo").set({
+							displayName: user.displayName,
+							email: user.email
+						});
+						sendEmailVerification();
+						document.cookie = "userName=" + displayName + ";";
+						document.cookie = "userId=" + uid + ";";
+						document.cookie = "email=" + email + ";";
+						window.location.href = "/";
+					}, function (error) {
+						alert(error.message);
+					});
+				}
+			});
 
-		// $(document).ready(function () {
-		// 	//	Listens for users signing in or out
-		// 	firebase.auth().onAuthStateChanged(function (user) {
-		// 		if (user && username != "") {
-		// 			//	User successfully created
-		// 			user.updateProfile({
-		// 				displayName: username
-		// 			}).then(function () {
-		// 				db.ref("users/" + user.uid + "/userInfo").set({
-		// 					displayName: user.displayName,
-		// 					email: user.email
-		// 				});
-		// 				sendEmailVerification();
-		// 				window.location.href = "/";
-		// 			}, function (error) {
-		// 				alert(error.message);
-		// 			});
-		// 		}
-		// 	});
-
-		// 	$("#signup-btn").click(function (event) {
-		// 		event.preventDefault();
-		// 		signUp();
-		// 	});
-		// 	//	Toggles Help Info on hover
-		// 	$(".help-icon").hover(function () {
-		// 		$(".tooltip-text").removeClass("js-hidden");
-		// 	}, function () {
-		// 		$(".tooltip-text").addClass("js-hidden");
-		// 	});
-		// });
+			$("#signup-btn").click(function (event) {
+				event.preventDefault();
+				signUp();
+			});
+			//	Toggles Help Info on hover
+			$(".help-icon").hover(function () {
+				$(".tooltip-text").removeClass("js-hidden");
+			}, function () {
+				$(".tooltip-text").addClass("js-hidden");
+			});
+		});
 	</script>
 </body>
 

@@ -1,5 +1,4 @@
 var username = "";
-console.log("Username: " + username)
 		$(document).ready(function () {
 			//	Listens for users signing in or out
 			firebase.auth().onAuthStateChanged(function (user) {
@@ -12,8 +11,6 @@ console.log("Username: " + username)
 							displayName: user.displayName,
                             email: user.email
                         });
-                        console.log("user.displayName: " + user.displayName);
-                        console.log("user.email: " + user.email);
 						sendEmailVerification();
 						window.location.href = "/";
 					}, function (error) {
@@ -34,5 +31,3 @@ console.log("Username: " + username)
 			});
         });
         
-        console.log("user.displayName: " + user.displayName);
-		console.log("user.email: " + user.email);

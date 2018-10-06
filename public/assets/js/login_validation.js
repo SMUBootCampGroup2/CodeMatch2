@@ -11,48 +11,23 @@ $(document).ready(function () {
             displayName = user.displayName;
             uid = user.uid;
             email = user.email;
-
-            // document.cookie = "userName=" + displayName + ";";
-            // document.cookie = "userId=" + uid + ";";
-            // document.cookie = "email=" + email + ";";
-
-            //	update user menu displays
-            // $(".username").text(escapeHTML(user.displayName));
-            // $(".dropdown").empty();
-            // var logout = $("<div>");
-            // logout.text("Logout");
-            // logout.attr("id", "logout");
-            // var profile = $("<div>");
-            // profile.text("Profile");
-            // $(".dropdown").append(logout, profile);	
-
+            console.log(user.displayName);
+            console.log(user.email);
+            console.log(uid);
+            
             //	usersInfo event listener
             db.ref("users/" + uid + "/userInfo").on("value", function (snapshot) {
                 if (snapshot) {
-                    // //	if userInfo exists, fill in the calculator form with the user"s previous values
-                    console.log("login_validation: " + displayName);
-                    console.log("login_validation: " + uid);
-                    console.log("login_validation: " + email);
-
+                    // if user info exists, create the following cookies 
                     document.cookie = "userName=" + displayName + ";";
-                    document.cookie = "userId=" + uid + ";";
                     document.cookie = "email=" + email + ";";
-
+                    document.cookie = "userId=" + uid + ";";
                 }
             }, function (error) {
                 console.log("Error: " + error.code);
             });
         } else {
-            //	redirect to homepage if not logged in
-            // window.location.href="/";
             console.log("else do nothing");
         }
     });
-    //	User Menu Logout event listener
-    // $(document).on("click", "#logout", logOut);
-
 });		//	End of document.ready()
-
-// document.cookie = "userName=" + displayName + ";";
-// document.cookie = "userId=" + uid + ";";
-// document.cookie = "email=" + email + ";";
