@@ -6,9 +6,11 @@ Code.Match is a web app that connects tutors and students based off of their Web
 
 
 ## Technologies
-We built Tutor Finder with the following technologies:
-•	Node.js,
+We built Code.Match with the following technologies:
+•	Node.js
 •	Express
+* HTML
+* CSS
 •	MySQL
 •	Bootstrap
 •	Materialize
@@ -18,6 +20,7 @@ We built Tutor Finder with the following technologies:
 
 ## Future Enhancements
 •	geolocation
+* calendar integration showing available tutors
 •	customizable profiles
 •	tutor reviews
 •	chat
