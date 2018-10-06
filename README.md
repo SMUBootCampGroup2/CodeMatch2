@@ -1,5 +1,6 @@
 CodeMatch 
-
+![alt text](CodeMatch2/public/assets/images/code-match-readme-photo.PNG)
+      
 
 Tutor Finder is a web app that connects tutors and students based off of their Web Development and coding skills. CodeMatch allows the user to create an account, answer a few questions to get an idea of what their learning needs and goals are. The student will instantly be matched to a uniquely handpicked professional so they may begin learning immediately, thus stepping up their coding game. 
 
