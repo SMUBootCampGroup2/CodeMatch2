@@ -7,7 +7,7 @@ We built Tutor Finder with the following technologies:
 •	Node.js,
 •	Express
 •	MySQL
-•	Handlebars
+•	Bootstrap
 •	Materialize
 •	Github
 •	Git
