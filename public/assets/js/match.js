@@ -92,7 +92,7 @@ $("#submitBtn").on("click", function(event) {
 
 $("#getStarted").on("click", function(event) {
     event.preventDefault();
-    window.location.href = "http://localhost:3000/survey";
+    window.location.href = "/survey";
 });
 
 // ********* Matching Logic
