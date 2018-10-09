@@ -208,3 +208,14 @@ text-align: justify;
     height: 100%;
 background-image: url('../images/background-3503420_1920.jpg');
 }
+
+
+/****************SIGN UP PAGE**********************/
+
+.signup-container {
+
+    background-image: url('../images/background-3503420_1920.jpg');
+    width: 100%;
+    height: 100%;
+}
+
